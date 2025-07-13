@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Leaf, Package, Route, Award, TrendingUp, Users, Truck } from "lucide-react"
+import { Leaf, Package, Route, Award, TrendingUp, Users, Truck, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -49,6 +49,9 @@ export default function HomePage() {
     return (
       <section id="contact" className="py-20 bg-white min-h-screen">
         <div className="container mx-auto px-4">
+          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -135,6 +138,9 @@ export default function HomePage() {
     return (
       <section id="help" className="py-20 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
+          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Help Center</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -248,6 +254,9 @@ export default function HomePage() {
     return (
       <section id="features" className="py-20 px-4 min-h-screen">
         <div className="container mx-auto">
+          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Revolutionizing Eco-Logistics</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -369,6 +378,9 @@ export default function HomePage() {
     return (
       <section id="how-it-works" className="py-20 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
+          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
+            <ArrowLeft className="h-4 w-4" /> Back
+          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">How EcoCart Works</h2>
             <p className="text-xl text-gray-600">Simple steps to sustainable logistics</p>
@@ -414,37 +426,35 @@ export default function HomePage() {
       <img src="/placeholder.jpg" alt="EcoCart background" className="pointer-events-none select-none absolute top-0 right-0 w-2/3 max-w-2xl opacity-15 blur-sm z-0" style={{objectFit: 'cover'}} />
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <img src="/placeholder-logo.png" alt="EcoCart Logo" className="h-6 w-6 sm:h-8 sm:w-8 grayscale opacity-80 drop-shadow-md" />
-            <span className="text-lg sm:text-2xl font-bold text-gray-900">EcoCart</span>
+        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center">
+          {/* Logo on far left */}
+          <div className="flex items-center space-x-2 flex-shrink-0">
+            <img src="/Copilot_20250713_142946.png" alt="EcoCart Logo" className="h-24 w-24 object-cover object-center opacity-90 scale-110" />
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            <button onClick={handleFeaturesClick} className="text-gray-600 hover:text-slate-600">
+          {/* Nav links centered (if present) */}
+          <nav className="hidden lg:flex items-center space-x-8 flex-grow justify-center">
+            <button onClick={handleFeaturesClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
               Features
             </button>
-            <button onClick={handleHowItWorksClick} className="text-gray-600 hover:text-slate-600">
+            <button onClick={handleHowItWorksClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
               How it Works
             </button>
-            <button onClick={handleContactClick} className="text-gray-600 hover:text-slate-600">
+            <button onClick={handleContactClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
               Contact
             </button>
-            <button onClick={handleHelpClick} className="text-gray-600 hover:text-slate-600">
+            <button onClick={handleHelpClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
               Help Center
             </button>
           </nav>
-
-          {/* Mobile & Desktop Buttons */}
-          <div className="flex items-center space-x-2">
+          {/* Login/Get Started on far right */}
+          <div className="flex items-center space-x-2 flex-shrink-0 ml-auto">
             <Link href="/auth" className="hidden sm:block">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
                 Login
               </Button>
             </Link>
             <Link href="/auth?mode=signup">
-              <Button className="bg-slate-800 hover:bg-slate-900 text-xs sm:text-sm px-3 py-2 sm:px-4">
+              <Button className="bg-slate-800 hover:bg-slate-900 text-xs sm:text-sm px-3 py-2 sm:px-4 transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
                 Get Started
               </Button>
             </Link>
@@ -467,12 +477,12 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
             <Link href="/auth?mode=signup&role=retailer">
-              <Button size="lg" className="bg-slate-700 hover:bg-slate-800 w-full sm:w-auto">
+              <Button size="lg" className="bg-slate-700 hover:bg-slate-800 w-full sm:w-auto transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
                 Start as Retailer
               </Button>
             </Link>
             <Link href="/auth?mode=signup&role=customer">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/70 border-slate-300 text-slate-700 hover:bg-slate-100">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/70 border-slate-300 text-slate-700 hover:bg-slate-100 transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
                 Join as Customer
               </Button>
             </Link>
@@ -630,10 +640,10 @@ export default function HomePage() {
       {/* This section is now conditionally rendered */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-slate-800 text-white">
+      <section className="py-20 bg-gradient-to-br from-blue-900 via-slate-800 to-slate-900">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Go Green?</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <h2 className="text-4xl font-bold mb-4 text-blue-50">Ready to Go Green?</h2>
+          <p className="text-xl mb-8 opacity-90 text-blue-100">
             Join thousands of retailers and customers making a difference with sustainable logistics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -656,19 +666,19 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-slate-800 text-slate-300 py-12 border-t border-slate-700">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Leaf className="h-6 w-6 text-slate-400" />
-                <span className="text-xl font-bold">EcoCart</span>
+                <Leaf className="h-6 w-6 text-blue-200" />
+                <span className="text-xl font-bold text-slate-100">EcoCart</span>
               </div>
-              <p className="text-gray-400">AI-powered eco-logistics platform for sustainable commerce.</p>
+              <p className="text-slate-300">AI-powered eco-logistics platform for sustainable commerce.</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Platform</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="font-semibold mb-4 text-slate-100">Platform</h3>
+              <ul className="space-y-2 text-slate-300">
                 <li>
                   <Link href="#features" className="hover:text-white">
                     Features
@@ -687,8 +697,8 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="font-semibold mb-4 text-slate-100">Company</h3>
+              <ul className="space-y-2 text-slate-300">
                 <li>
                   <Link href="#about" className="hover:text-white">
                     About
@@ -707,8 +717,8 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
+              <h3 className="font-semibold mb-4 text-slate-100">Support</h3>
+              <ul className="space-y-2 text-slate-300">
                 <li>
                   <button onClick={handleHelpClick} className="hover:text-white text-left">
                     Help Center
@@ -727,7 +737,7 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
             <p>&copy; 2024 EcoCart. All rights reserved.</p>
           </div>
         </div>
