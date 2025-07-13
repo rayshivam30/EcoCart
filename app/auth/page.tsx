@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -12,13 +12,15 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Leaf, Store, User } from "lucide-react"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase";
 
 export default function AuthPage() {
-  const searchParams = useSearchParams()
-  const mode = searchParams.get("mode") || "login"
-  const role = searchParams.get("role") || "customer"
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const mode = searchParams.get("mode") || "login";
+  const role = searchParams.get("role") || "customer";
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -26,23 +28,53 @@ export default function AuthPage() {
     fullName: "",
     companyName: "",
     role: role,
-  })
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
-    // Simulate authentication
-    setTimeout(() => {
-      setIsLoading(false)
-      // Redirect based on role
-      if (formData.role === "retailer") {
-        window.location.href = "/retailer/dashboard"
-      } else {
-        window.location.href = "/customer/dashboard"
+    let authResult;
+    if (mode === "signup") {
+      authResult = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName,
+            company_name: formData.companyName,
+            role: formData.role,
+          },
+        },
+      });
+      setIsLoading(false);
+      if (authResult.error) {
+        alert(authResult.error.message);
+        return;
       }
-    }, 2000)
-  }
+      if (!authResult.data.session) {
+        alert("Signup successful! Please check your email and confirm your account before logging in.");
+        return;
+      }
+    } else {
+      authResult = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+      setIsLoading(false);
+      if (authResult.error) {
+        alert(authResult.error.message);
+        return;
+      }
+    }
+
+    // Redirect based on role
+    if (formData.role === "retailer") {
+      router.push("/retailer/dashboard");
+    } else {
+      router.push("/customer/dashboard");
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))

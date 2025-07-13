@@ -1,60 +1,40 @@
 import { type NextRequest, NextResponse } from "next/server"
 
-// Mock route optimization service
+// Free route optimization service using OpenRouteService
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { origin, destination, vehicleType, priority } = body
 
-    // Simulate API processing delay
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    // Mock route optimization results
-    const routeData = {
-      optimizedRoute: {
-        distance: calculateDistance(origin, destination),
-        duration: calculateDuration(origin, destination, vehicleType),
-        vehicleType: determineOptimalVehicle(vehicleType, priority),
-        co2Emissions: calculateEmissions(origin, destination, vehicleType),
-        co2Saved: calculateCO2Savings(origin, destination, vehicleType),
-        cost: calculateDeliveryCost(origin, destination, vehicleType),
+    // Call the free maps API (OpenRouteService)
+    const response = await fetch("/api/geospatial/free-maps", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      alternatives: [
-        {
-          vehicleType: "Electric Van",
-          distance: 24.5,
-          duration: 35,
-          co2Emissions: 0,
-          co2Saved: 4.2,
-          cost: 8.5,
-        },
-        {
-          vehicleType: "Hybrid Truck",
-          distance: 23.8,
-          duration: 32,
-          co2Emissions: 1.8,
-          co2Saved: 2.4,
-          cost: 7.2,
-        },
-        {
-          vehicleType: "Standard Van",
-          distance: 25.2,
-          duration: 38,
-          co2Emissions: 4.2,
-          co2Saved: 0,
-          cost: 6.8,
-        },
-      ],
-      waypoints: generateWaypoints(origin, destination),
-      trafficConditions: "moderate",
-      weatherImpact: "minimal",
+      body: JSON.stringify({
+        origin,
+        destination,
+        vehicleType,
+        priority,
+      }),
+    })
+
+    const result = await response.json()
+
+    if (!result.success) {
+      return NextResponse.json(
+        { success: false, error: result.error || "Failed to optimize route" },
+        { status: 500 }
+      )
     }
 
     return NextResponse.json({
       success: true,
-      data: routeData,
+      data: result.data,
     })
   } catch (error) {
+    console.error("Route optimization error:", error)
     return NextResponse.json({ success: false, error: "Failed to optimize route" }, { status: 500 })
   }
 }

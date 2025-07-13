@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { useEffect } from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,11 +9,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Package, Upload, TrendingUp, Route, BarChart3, Plus, Eye, Settings, Bell } from "lucide-react"
+import { Package, Upload, TrendingUp, Route, BarChart3, Plus, Eye, Settings, Bell, Shield } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import BlockchainTraceability from "@/components/BlockchainTraceability"
+import { supabase } from "@/lib/supabase"
+import { usePathname, useRouter } from "next/navigation";
 
 export default function RetailerDashboard() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState("overview")
   const [isUploading, setIsUploading] = useState(false)
   const [productForm, setProductForm] = useState({
@@ -27,15 +32,113 @@ export default function RetailerDashboard() {
     description: "",
   })
 
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (
+        !session?.user &&
+        pathname !== "/auth" &&
+        pathname !== "/auth?mode=signup"
+      ) {
+        router.push("/auth");
+      }
+    });
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, [router, pathname]);
+
   const handleProductSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsUploading(true)
 
-    // Simulate AI processing
-    setTimeout(() => {
+    try {
+      // Get the current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setIsUploading(false);
+        throw new Error("User not authenticated");
+      }
+      // 1. Create the product in Supabase with retailer_id
+      const { data: createdProduct, error: productError } = await supabase
+        .from("products")
+        .insert([
+          {
+            name: productForm.name,
+            length: productForm.length,
+            width: productForm.width,
+            height: productForm.height,
+            weight: productForm.weight,
+            category: productForm.category,
+            destination: productForm.destination,
+            description: productForm.description,
+            retailer_id: user.id, // <-- Pass the authenticated user's ID
+          },
+        ])
+        .select()
+        .single()
+      if (productError || !createdProduct) {
+        console.error("Supabase product insert error:", productError);
+        setIsUploading(false)
+        throw new Error("Failed to create product")
+      }
+      const productId = createdProduct.id
+
+      // 2. Call the real ML packaging API
+      const response = await fetch("/api/ai/packaging-ml", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          length: productForm.length,
+          width: productForm.width,
+          height: productForm.height,
+          weight: productForm.weight,
+          category: productForm.category,
+          destination: productForm.destination,
+        }),
+      })
+      const result = await response.json()
+
+      if (result.success) {
+        // 3. Store the packaging suggestion in Supabase with the real product ID
+        const packagingResponse = await fetch("/api/packaging/suggestions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId,
+            ...result.data,
+          }),
+        })
+
+        // Add blockchain record for traceability
+        if (packagingResponse.ok) {
+          const packagingData = await packagingResponse.json()
+          await fetch("/api/blockchain/traceability", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              action: "add",
+              packagingId: packagingData.id,
+              materialOrigin: "Sustainable Forests, Oregon",
+              certificationType: "FSC Certified",
+              certificationNumber: `FSC-${Date.now()}`,
+              sustainabilityScore: result.data.ecoScore,
+            }),
+          })
+        }
+      }
+
       setIsUploading(false)
       setActiveTab("suggestions")
-    }, 3000)
+    } catch (error) {
+      console.error("Error processing product:", error)
+      setIsUploading(false)
+    }
   }
 
   const mockProducts = [
@@ -132,6 +235,14 @@ export default function RetailerDashboard() {
             >
               <TrendingUp className="h-4 w-4 mr-2" />
               <span className="hidden sm:inline">Analytics</span>
+            </Button>
+            <Button
+              variant={activeTab === "blockchain" ? "default" : "ghost"}
+              className="flex-shrink-0 lg:w-full justify-start text-sm whitespace-nowrap"
+              onClick={() => setActiveTab("blockchain")}
+            >
+              <Shield className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Blockchain</span>
             </Button>
           </nav>
         </aside>
@@ -612,6 +723,16 @@ export default function RetailerDashboard() {
                   </CardContent>
                 </Card>
               </div>
+            </div>
+          )}
+
+          {activeTab === "blockchain" && (
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Blockchain Traceability</h1>
+                <p className="text-gray-600 mt-2">Verify packaging material authenticity and sustainability</p>
+              </div>
+              <BlockchainTraceability packagingId="temp-packaging-id" />
             </div>
           )}
         </main>
