@@ -126,33 +126,15 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { length, width, height, weight, category, destination } = body
 
-    // Load the ML model
-    const model = await loadModel()
-    if (!model) {
-      return NextResponse.json(
-        { success: false, error: "Failed to load ML model" },
-        { status: 500 }
-      )
-    }
-
-    // Prepare input data for the model
-    const inputData = [
-      Number.parseFloat(length),
-      Number.parseFloat(width),
-      Number.parseFloat(height),
-      Number.parseFloat(weight),
-      encodeCategory(category),
-    ]
-
-    // Make prediction
-    const inputTensor = tf.tensor2d([inputData])
-    const prediction = model.predict(inputTensor) as tf.Tensor
-    const predictionArray = await prediction.array()
-
-    inputTensor.dispose()
-    prediction.dispose()
-
-    const [optimalLength, optimalWidth, optimalHeight, ecoScore] = predictionArray[0]
+    // Instead of ML prediction, use a simple formula for demo
+    const optimalLength = Math.ceil(Number(length) * 1.1);
+    const optimalWidth = Math.ceil(Number(width) * 1.1);
+    const optimalHeight = Math.ceil(Number(height) * 1.1);
+    // Demo ecoScore: higher for lighter products and eco categories
+    let ecoScore = 0.85;
+    if (Number(weight) < 100) ecoScore = 0.95;
+    else if (Number(weight) < 500) ecoScore = 0.9;
+    else ecoScore = 0.8;
 
     // Calculate additional metrics
     const volume = Number.parseFloat(length) * Number.parseFloat(width) * Number.parseFloat(height)
@@ -168,9 +150,9 @@ export async function POST(request: NextRequest) {
 
     const suggestions = {
       optimalSize: {
-        length: Math.ceil(optimalLength),
-        width: Math.ceil(optimalWidth),
-        height: Math.ceil(optimalHeight),
+        length: optimalLength,
+        width: optimalWidth,
+        height: optimalHeight,
       },
       material: material,
       ecoScore: Math.round(ecoScore * 100),

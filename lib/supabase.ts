@@ -102,6 +102,21 @@ export const dbHelpers = {
     return data
   },
 
+  // Update user profile (for preferences/settings)
+  async updateProfile(userId: string, updates: Partial<Profile>): Promise<Profile | null> {
+    const { data, error } = await supabase
+      .from("profiles")
+      .update(updates)
+      .eq("id", userId)
+      .select()
+      .single()
+    if (error) {
+      console.error("Error updating profile:", error)
+      return null
+    }
+    return data
+  },
+
   // Get products for retailer
   async getRetailerProducts(retailerId: string): Promise<Product[]> {
     const { data, error } = await supabase

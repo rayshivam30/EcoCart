@@ -8,10 +8,10 @@ export async function POST(request: NextRequest) {
 
     // Use OpenRouteService for free routing
     const coordinates = await getCoordinates(origin, destination)
-    
+    console.log('Geocoded coordinates:', coordinates)
     if (!coordinates) {
       return NextResponse.json(
-        { success: false, error: "Could not get coordinates for locations" },
+        { success: false, error: `Could not get coordinates for locations. Origin: ${origin}, Destination: ${destination}` },
         { status: 400 }
       )
     }
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": process.env.OPENROUTE_API_KEY || "", // Optional, works without key for basic usage
+          "Authorization": process.env.OPENROUTE_API_KEY || "",
         },
         body: JSON.stringify({
           coordinates: [
@@ -31,33 +31,35 @@ export async function POST(request: NextRequest) {
             [coordinates.destination.lng, coordinates.destination.lat]
           ],
           format: "geojson",
-          preference: priority === "eco" ? "green" : "fastest",
+          preference: priority === "eco" ? "shortest" : "fastest",
           units: "km"
         })
       }
     )
 
     const routeData = await routeResponse.json()
+    console.log('ORS API response:', JSON.stringify(routeData).slice(0, 500))
 
-    if (!routeData.features || routeData.features.length === 0) {
+    if (!routeData.routes || routeData.routes.length === 0) {
       return NextResponse.json(
-        { success: false, error: "No route found" },
+        { success: false, error: `No route found. Coordinates: ${JSON.stringify(coordinates)}, ORS: ${JSON.stringify(routeData).slice(0, 300)}` },
         { status: 400 }
       )
     }
 
-    const route = routeData.features[0]
-    const properties = route.properties
-    const distanceKm = properties.segments[0].distance / 1000
-    const durationMinutes = properties.segments[0].duration / 60
+    const route = routeData.routes[0]
+    const summary = route.summary
+    const segment = route.segments[0]
+    const distanceKm = summary.distance
+    const durationMinutes = summary.duration / 60
 
     // Calculate emissions and costs
     const emissions = calculateEmissions(distanceKm, vehicleType)
     const co2Saved = calculateCO2Savings(distanceKm, vehicleType)
     const deliveryCost = calculateDeliveryCost(distanceKm, vehicleType)
 
-    // Get alternative routes
-    const alternatives = await getAlternativeRoutes(coordinates, vehicleType)
+    // Get alternative routes (optional, can be updated similarly if needed)
+    // const alternatives = await getAlternativeRoutes(coordinates, vehicleType)
 
     const result = {
       optimizedRoute: {
@@ -67,15 +69,17 @@ export async function POST(request: NextRequest) {
         co2Emissions: emissions,
         co2Saved: co2Saved,
         cost: deliveryCost,
-        polyline: route.geometry.coordinates.map((coord: number[]) => ({
-          lat: coord[1],
-          lng: coord[0]
-        })),
+        polyline: route.geometry && route.geometry.coordinates
+          ? route.geometry.coordinates.map((coord: number[]) => ({
+              lat: coord[1],
+              lng: coord[0]
+            }))
+          : [],
         waypoints: generateWaypoints(route.geometry.coordinates),
       },
-      alternatives: alternatives,
-      trafficConditions: await getTrafficConditions(coordinates),
-      weatherImpact: await getWeatherImpact(coordinates),
+      // alternatives: alternatives,
+      // trafficConditions: await getTrafficConditions(coordinates),
+      // weatherImpact: await getWeatherImpact(coordinates),
     }
 
     return NextResponse.json({
@@ -94,15 +98,29 @@ export async function POST(request: NextRequest) {
 async function getCoordinates(origin: string, destination: string) {
   try {
     // Use Nominatim (OpenStreetMap geocoding) - completely free
-    const originResponse = await fetch(
+    let originResponse = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(origin)}&limit=1`
     )
-    const originData = await originResponse.json()
+    let originData = await originResponse.json()
 
-    const destResponse = await fetch(
+    let destResponse = await fetch(
       `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(destination)}&limit=1`
     )
-    const destData = await destResponse.json()
+    let destData = await destResponse.json()
+
+    // Fallback: try appending ', India' if not found
+    if (originData.length === 0) {
+      originResponse = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(origin + ', India')}&limit=1`
+      )
+      originData = await originResponse.json()
+    }
+    if (destData.length === 0) {
+      destResponse = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(destination + ', India')}&limit=1`
+      )
+      destData = await destResponse.json()
+    }
 
     if (originData.length === 0 || destData.length === 0) {
       return null
@@ -209,12 +227,13 @@ async function getAlternativeRoutes(coordinates: any, vehicleType: string) {
   }
 }
 
-function generateWaypoints(coordinates: number[][]) {
-  return coordinates.map((coord, index) => ({
+function generateWaypoints(coordinates: any) {
+  if (!Array.isArray(coordinates) || coordinates.length === 0) return [];
+  return coordinates.map((coord: number[], index: number) => ({
     lat: coord[1],
     lng: coord[0],
     name: index === 0 ? "Origin" : index === coordinates.length - 1 ? "Destination" : `Waypoint ${index}`,
-  }))
+  }));
 }
 
 async function getTrafficConditions(coordinates: any) {

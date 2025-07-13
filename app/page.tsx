@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Leaf, Package, Route, Award, TrendingUp, Users, Truck, ArrowLeft } from "lucide-react"
+import { Leaf, Package, Route, Award, TrendingUp, Users } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -49,9 +49,6 @@ export default function HomePage() {
     return (
       <section id="contact" className="py-20 bg-white min-h-screen">
         <div className="container mx-auto px-4">
-          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -138,9 +135,6 @@ export default function HomePage() {
     return (
       <section id="help" className="py-20 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
-          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Help Center</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -254,9 +248,6 @@ export default function HomePage() {
     return (
       <section id="features" className="py-20 px-4 min-h-screen">
         <div className="container mx-auto">
-          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Revolutionizing Eco-Logistics</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -266,7 +257,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Package className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>AI Packaging Optimization</CardTitle>
@@ -283,7 +274,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Route className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Carbon-Optimized Routes</CardTitle>
@@ -300,7 +291,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Award className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Blockchain Traceability</CardTitle>
@@ -318,7 +309,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <TrendingUp className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Retailer Dashboard</CardTitle>
@@ -335,7 +326,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Users className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Customer Rewards</CardTitle>
@@ -352,7 +343,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Leaf className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Real-time Analytics</CardTitle>
@@ -378,9 +369,6 @@ export default function HomePage() {
     return (
       <section id="how-it-works" className="py-20 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
-          <button onClick={() => window.location.reload()} className="mb-8 flex items-center gap-2 px-4 py-2 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium shadow transition-all">
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">How EcoCart Works</h2>
             <p className="text-xl text-gray-600">Simple steps to sustainable logistics</p>
@@ -421,42 +409,40 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-200 via-slate-400 to-blue-900 relative overflow-hidden">
-      {/* Subtle background image */}
-      <img src="/placeholder.jpg" alt="EcoCart background" className="pointer-events-none select-none absolute top-0 right-0 w-2/3 max-w-2xl opacity-15 blur-sm z-0" style={{objectFit: 'cover'}} />
+    <div className="min-h-screen" style={{ backgroundColor: '#fff9c4' }}>
       {/* Header */}
-      <header className="border-b bg-white/85 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          {/* Logo on the left */}
-          <div className="flex items-center">
-            <img src="/Copilot_20250713_142946.png" alt="EcoCart Logo" className="h-24 w-24 object-cover object-center opacity-90 scale-110" />
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-slate-600" />
+            <span className="text-lg sm:text-2xl font-bold text-gray-900">EcoCart</span>
           </div>
 
-          {/* Navigation in the center */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <button onClick={handleFeaturesClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
+            <button onClick={handleFeaturesClick} className="text-gray-600 hover:text-slate-600">
               Features
             </button>
-            <button onClick={handleHowItWorksClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
+            <button onClick={handleHowItWorksClick} className="text-gray-600 hover:text-slate-600">
               How it Works
             </button>
-            <button onClick={handleContactClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
+            <button onClick={handleContactClick} className="text-gray-600 hover:text-slate-600">
               Contact
             </button>
-            <button onClick={handleHelpClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
+            <button onClick={handleHelpClick} className="text-gray-600 hover:text-slate-600">
               Help Center
             </button>
           </nav>
 
-          {/* Login/Get Started buttons on the right */}
+          {/* Mobile & Desktop Buttons */}
           <div className="flex items-center space-x-2">
             <Link href="/auth" className="hidden sm:block">
-              <Button variant="outline" size="sm" className="transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+              <Button variant="outline" size="sm">
                 Login
               </Button>
             </Link>
             <Link href="/auth?mode=signup">
-              <Button className="bg-slate-800 hover:bg-slate-900 text-xs sm:text-sm px-3 py-2 sm:px-4 transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+              <Button className="bg-slate-800 hover:bg-slate-900 text-xs sm:text-sm px-3 py-2 sm:px-4">
                 Get Started
               </Button>
             </Link>
@@ -465,26 +451,26 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 sm:py-20 px-4 relative z-10">
+      <section className="py-12 sm:py-20 px-4">
         <div className="container mx-auto text-center">
           <Badge className="mb-4 bg-slate-100 text-slate-800 hover:bg-slate-100 text-xs sm:text-sm">
             AI-Powered Eco-Logistics Platform
           </Badge>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
             Smart Packaging &<br />
-            <span className="text-slate-700">Green Delivery</span>
+            <span className="text-slate-600">Green Delivery</span>
           </h1>
           <p className="text-base sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
-            AI-optimized packaging and delivery. Lower costs and carbon footprint.
+            AI-driven packaging, green routes, and blockchain materials—save costs and cut your carbon footprint.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
             <Link href="/auth?mode=signup&role=retailer">
-              <Button size="lg" className="bg-slate-700 hover:bg-slate-800 w-full sm:w-auto transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+              <Button size="lg" className="bg-slate-800 hover:bg-slate-900 w-full sm:w-auto">
                 Start as Retailer
               </Button>
             </Link>
             <Link href="/auth?mode=signup&role=customer">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/70 border-slate-300 text-slate-700 hover:bg-slate-100 transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent">
                 Join as Customer
               </Button>
             </Link>
@@ -497,22 +483,18 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
             <div>
-              <Leaf className="mx-auto mb-2 h-8 w-8 text-slate-400" />
               <div className="text-2xl sm:text-3xl font-bold text-slate-600 mb-2">85%</div>
               <div className="text-sm sm:text-base text-gray-600">CO2 Reduction</div>
             </div>
             <div>
-              <Package className="mx-auto mb-2 h-8 w-8 text-slate-400" />
               <div className="text-2xl sm:text-3xl font-bold text-slate-600 mb-2">40%</div>
               <div className="text-sm sm:text-base text-gray-600">Packaging Waste Saved</div>
             </div>
             <div>
-              <Users className="mx-auto mb-2 h-8 w-8 text-slate-400" />
               <div className="text-2xl sm:text-3xl font-bold text-slate-600 mb-2">1000+</div>
               <div className="text-sm sm:text-base text-gray-600">Active Retailers</div>
             </div>
             <div>
-              <Route className="mx-auto mb-2 h-8 w-8 text-slate-400" />
               <div className="text-2xl sm:text-3xl font-bold text-slate-600 mb-2">50K+</div>
               <div className="text-sm sm:text-base text-gray-600">Green Deliveries</div>
             </div>
@@ -532,7 +514,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Package className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>AI Packaging Optimization</CardTitle>
@@ -549,7 +531,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Route className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Carbon-Optimized Routes</CardTitle>
@@ -566,7 +548,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Award className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Blockchain Traceability</CardTitle>
@@ -584,7 +566,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <TrendingUp className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Retailer Dashboard</CardTitle>
@@ -601,7 +583,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Users className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Customer Rewards</CardTitle>
@@ -618,7 +600,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg bg-white/80 hover:bg-slate-50 hover:shadow-2xl hover:-translate-y-1 hover:border-slate-200 transition-all duration-300 ease-out transform cursor-pointer">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
                 <Leaf className="h-12 w-12 text-slate-600 mb-4" />
                 <CardTitle>Real-time Analytics</CardTitle>
@@ -642,10 +624,10 @@ export default function HomePage() {
       {/* This section is now conditionally rendered */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 via-slate-800 to-slate-900">
+      <section className="py-20 bg-slate-800 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4 text-blue-50">Ready to Go Green?</h2>
-          <p className="text-xl mb-8 opacity-90 text-blue-100">
+          <h2 className="text-4xl font-bold mb-4">Ready to Go Green?</h2>
+          <p className="text-xl mb-8 opacity-90">
             Join thousands of retailers and customers making a difference with sustainable logistics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -668,19 +650,19 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-800 text-slate-300 py-12 border-t border-slate-700">
+      <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Leaf className="h-6 w-6 text-blue-200" />
-                <span className="text-xl font-bold text-slate-100">EcoCart</span>
+                <Leaf className="h-6 w-6 text-slate-400" />
+                <span className="text-xl font-bold">EcoCart</span>
               </div>
-              <p className="text-slate-300">AI-powered eco-logistics platform for sustainable commerce.</p>
+              <p className="text-gray-400">AI-powered eco-logistics platform for sustainable commerce.</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-slate-100">Platform</h3>
-              <ul className="space-y-2 text-slate-300">
+              <h3 className="font-semibold mb-4">Platform</h3>
+              <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="#features" className="hover:text-white">
                     Features
@@ -699,8 +681,8 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-slate-100">Company</h3>
-              <ul className="space-y-2 text-slate-300">
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link href="#about" className="hover:text-white">
                     About
@@ -719,8 +701,8 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-slate-100">Support</h3>
-              <ul className="space-y-2 text-slate-300">
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-gray-400">
                 <li>
                   <button onClick={handleHelpClick} className="hover:text-white text-left">
                     Help Center
@@ -739,7 +721,7 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2024 EcoCart. All rights reserved.</p>
           </div>
         </div>
