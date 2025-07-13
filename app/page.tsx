@@ -425,14 +425,15 @@ export default function HomePage() {
       {/* Subtle background image */}
       <img src="/placeholder.jpg" alt="EcoCart background" className="pointer-events-none select-none absolute top-0 right-0 w-2/3 max-w-2xl opacity-15 blur-sm z-0" style={{objectFit: 'cover'}} />
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center">
-          {/* Logo on far left */}
-          <div className="flex items-center space-x-2 flex-shrink-0">
+      <header className="border-b bg-white/85 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          {/* Logo on the left */}
+          <div className="flex items-center">
             <img src="/Copilot_20250713_142946.png" alt="EcoCart Logo" className="h-24 w-24 object-cover object-center opacity-90 scale-110" />
           </div>
-          {/* Nav links centered (if present) */}
-          <nav className="hidden lg:flex items-center space-x-8 flex-grow justify-center">
+
+          {/* Navigation in the center */}
+          <nav className="hidden lg:flex items-center space-x-8">
             <button onClick={handleFeaturesClick} className="text-gray-600 hover:text-blue-700 transition-all duration-200 transform hover:-translate-y-1 hover:font-bold">
               Features
             </button>
@@ -446,8 +447,9 @@ export default function HomePage() {
               Help Center
             </button>
           </nav>
-          {/* Login/Get Started on far right */}
-          <div className="flex items-center space-x-2 flex-shrink-0 ml-auto">
+
+          {/* Login/Get Started buttons on the right */}
+          <div className="flex items-center space-x-2">
             <Link href="/auth" className="hidden sm:block">
               <Button variant="outline" size="sm" className="transition-all duration-200 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg">
                 Login
