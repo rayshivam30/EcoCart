@@ -80,13 +80,21 @@ export default function AuthPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  const handleTabChange = (value: string) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.set("mode", value);
+    router.push(`/auth?${params.toString()}`);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Subtle animated glassmorphic gradient background overlay */}
+      <div className="absolute inset-0 z-0 animate-gradient-move bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-slate-200 via-slate-100 to-slate-300 opacity-70 blur-xl" />
+      <div className="w-full max-w-md z-10">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <Link href="/" className="inline-flex items-center space-x-2 mb-4">
-            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-slate-600" />
             <span className="text-xl sm:text-2xl font-bold text-gray-900">EcoCart</span>
           </Link>
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
@@ -97,20 +105,13 @@ export default function AuthPage() {
           </p>
         </div>
 
-        <Card className="shadow-lg">
+        {/* Subtle Glassmorphic Card with animation */}
+        <Card className="shadow-xl border border-white/30 bg-white/60 backdrop-blur-md transition-all duration-700 animate-fade-slide-in rounded-2xl">
           <CardHeader className="pb-4">
-            <Tabs value={mode} className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login" className="text-sm">
-                  <Link href="/auth?mode=login" className="w-full">
-                    Login
-                  </Link>
-                </TabsTrigger>
-                <TabsTrigger value="signup" className="text-sm">
-                  <Link href="/auth?mode=signup" className="w-full">
-                    Sign Up
-                  </Link>
-                </TabsTrigger>
+            <Tabs value={mode} onValueChange={handleTabChange} className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-white/70 backdrop-blur rounded-xl overflow-hidden">
+                <TabsTrigger value="login" className={`text-sm font-semibold py-2 transition-colors duration-300 focus:z-10 ${mode === "login" ? "bg-slate-200 text-slate-900 shadow" : "hover:bg-slate-100 text-gray-700"}`}>Login</TabsTrigger>
+                <TabsTrigger value="signup" className={`text-sm font-semibold py-2 transition-colors duration-300 focus:z-10 ${mode === "signup" ? "bg-slate-200 text-slate-900 shadow" : "hover:bg-slate-100 text-gray-700"}`}>Sign Up</TabsTrigger>
               </TabsList>
             </Tabs>
           </CardHeader>
@@ -126,10 +127,10 @@ export default function AuthPage() {
                       Account Type
                     </Label>
                     <Select value={formData.role} onValueChange={(value) => handleInputChange("role", value)}>
-                      <SelectTrigger className="h-10">
+                      <SelectTrigger className="h-10 bg-white/60 backdrop-blur rounded-lg border border-white/40 focus:ring-2 focus:ring-green-300 transition-all duration-300">
                         <SelectValue placeholder="Select account type" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white/80 backdrop-blur border border-white/40 rounded-lg">
                         <SelectItem value="customer">
                           <div className="flex items-center space-x-2">
                             <User className="h-4 w-4" />
@@ -155,6 +156,7 @@ export default function AuthPage() {
                       value={formData.fullName}
                       onChange={(e) => handleInputChange("fullName", e.target.value)}
                       required
+                      className="bg-white/60 backdrop-blur border border-white/40 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-300"
                     />
                   </div>
 
@@ -168,6 +170,7 @@ export default function AuthPage() {
                         value={formData.companyName}
                         onChange={(e) => handleInputChange("companyName", e.target.value)}
                         required
+                        className="bg-white/60 backdrop-blur border border-white/40 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-300"
                       />
                     </div>
                   )}
@@ -183,7 +186,7 @@ export default function AuthPage() {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="h-10"
+                  className="h-10 bg-white/60 backdrop-blur border border-white/40 rounded-lg focus:ring-2 focus:ring-green-300 transition-all duration-300"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
@@ -199,6 +202,7 @@ export default function AuthPage() {
                   value={formData.password}
                   onChange={(e) => handleInputChange("password", e.target.value)}
                   required
+                  className="bg-white/60 backdrop-blur border border-white/40 rounded-lg focus:ring-2 focus:ring-green-300 transition-all duration-300"
                 />
               </div>
 
@@ -208,16 +212,18 @@ export default function AuthPage() {
                   <Input
                     id="confirmPassword"
                     type="password"
-                    placeholder="Confirm your password"
                     value={formData.confirmPassword}
                     onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
                     required
+                    className="bg-white/60 backdrop-blur border border-white/40 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-300"
                   />
                 </div>
               )}
 
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 h-10" disabled={isLoading}>
-                {isLoading ? "Processing..." : mode === "signup" ? "Create Account" : "Sign In"}
+              <Button type="submit" className="w-full bg-slate-800 hover:bg-slate-900 h-10 rounded-lg shadow-lg transition-all duration-300 focus:ring-2 focus:ring-slate-400 focus:outline-none" disabled={isLoading}>
+                {isLoading ? (
+                  <span className="animate-pulse">Processing...</span>
+                ) : mode === "signup" ? "Create Account" : "Sign In"}
               </Button>
             </form>
 
@@ -252,6 +258,30 @@ export default function AuthPage() {
           </Link>
         </div>
       </div>
+      {/* Keyframes for fade-slide-in animation */}
+      <style jsx global>{`
+        @keyframes fade-slide-in {
+          0% {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        .animate-fade-slide-in {
+          animation: fade-slide-in 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes gradient-move {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .animate-gradient-move {
+          background-size: 200% 200%;
+          animation: gradient-move 8s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   )
 }
