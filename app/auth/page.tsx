@@ -83,33 +83,33 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-accent to-green-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <Link href="/" className="inline-flex items-center space-x-2 mb-4">
-            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
-            <span className="text-xl sm:text-2xl font-bold text-gray-900">EcoCart</span>
+            <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+            <span className="text-xl sm:text-2xl font-bold text-primary">EcoCart</span>
           </Link>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+          <h1 className="section-title text-2xl sm:text-3xl mb-2">
             {mode === "signup" ? "Create Account" : "Welcome Back"}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 mt-2 px-2">
+          <p className="text-sm sm:text-base text-foreground/70 mt-2 px-2">
             {mode === "signup" ? "Join the sustainable logistics revolution" : "Sign in to your EcoCart account"}
           </p>
         </div>
 
-        <Card className="shadow-lg">
+        <Card className="shadow-2xl rounded-2xl border border-accent/40 bg-white/90 backdrop-blur-sm">
           <CardHeader className="pb-4">
             <Tabs value={mode} className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login" className="text-sm">
-                  <Link href="/auth?mode=login" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-accent/30 rounded-xl p-1">
+                <TabsTrigger value="login" className="text-sm rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white transition-colors">
+                  <Link href="/auth?mode=login" className="w-full block py-1">
                     Login
                   </Link>
                 </TabsTrigger>
-                <TabsTrigger value="signup" className="text-sm">
-                  <Link href="/auth?mode=signup" className="w-full">
+                <TabsTrigger value="signup" className="text-sm rounded-lg data-[state=active]:bg-primary data-[state=active]:text-white transition-colors">
+                  <Link href="/auth?mode=signup" className="w-full block py-1">
                     Sign Up
                   </Link>
                 </TabsTrigger>
@@ -118,17 +118,15 @@ export default function AuthPage() {
           </CardHeader>
 
           <CardContent className="px-4 sm:px-6">
-            {/* Form content remains the same but with responsive spacing */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* All form fields with responsive text sizes */}
+            <form onSubmit={handleSubmit} className="space-y-5">
               {mode === "signup" && (
                 <>
                   <div className="space-y-2">
-                    <Label htmlFor="role" className="text-sm">
+                    <Label htmlFor="role" className="text-sm text-primary">
                       Account Type
                     </Label>
                     <Select value={formData.role} onValueChange={(value) => handleInputChange("role", value)}>
-                      <SelectTrigger className="h-10">
+                      <SelectTrigger className="h-10 rounded-lg border-accent/50 focus:ring-2 focus:ring-primary">
                         <SelectValue placeholder="Select account type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -149,7 +147,7 @@ export default function AuthPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">{formData.role === "retailer" ? "Contact Name" : "Full Name"}</Label>
+                    <Label htmlFor="fullName" className="text-primary">{formData.role === "retailer" ? "Contact Name" : "Full Name"}</Label>
                     <Input
                       id="fullName"
                       type="text"
@@ -157,12 +155,13 @@ export default function AuthPage() {
                       value={formData.fullName}
                       onChange={(e) => handleInputChange("fullName", e.target.value)}
                       required
+                      className="rounded-lg border-accent/50 focus:ring-2 focus:ring-primary shadow-sm"
                     />
                   </div>
 
                   {formData.role === "retailer" && (
                     <div className="space-y-2">
-                      <Label htmlFor="companyName">Company Name</Label>
+                      <Label htmlFor="companyName" className="text-primary">Company Name</Label>
                       <Input
                         id="companyName"
                         type="text"
@@ -170,22 +169,22 @@ export default function AuthPage() {
                         value={formData.companyName}
                         onChange={(e) => handleInputChange("companyName", e.target.value)}
                         required
+                        className="rounded-lg border-accent/50 focus:ring-2 focus:ring-primary shadow-sm"
                       />
                     </div>
                   )}
                 </>
               )}
 
-              {/* Email and password fields with mobile-friendly sizing */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm">
+                <Label htmlFor="email" className="text-sm text-primary">
                   Email
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="Enter your email"
-                  className="h-10"
+                  className="h-10 rounded-lg border-accent/50 focus:ring-2 focus:ring-primary shadow-sm"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
@@ -193,7 +192,7 @@ export default function AuthPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-primary">Password</Label>
                 <Input
                   id="password"
                   type="password"
@@ -201,12 +200,13 @@ export default function AuthPage() {
                   value={formData.password}
                   onChange={(e) => handleInputChange("password", e.target.value)}
                   required
+                  className="rounded-lg border-accent/50 focus:ring-2 focus:ring-primary shadow-sm"
                 />
               </div>
 
               {mode === "signup" && (
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Label htmlFor="confirmPassword" className="text-primary">Confirm Password</Label>
                   <Input
                     id="confirmPassword"
                     type="password"
@@ -214,27 +214,33 @@ export default function AuthPage() {
                     value={formData.confirmPassword}
                     onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
                     required
+                    className="rounded-lg border-accent/50 focus:ring-2 focus:ring-primary shadow-sm"
                   />
                 </div>
               )}
 
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 h-10" disabled={isLoading}>
-                {isLoading ? "Processing..." : mode === "signup" ? "Create Account" : "Sign In"}
+              <Button type="submit" className="w-full button-enhanced button-green h-11 text-base font-semibold" disabled={isLoading}>
+                {isLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>
+                    Processing...
+                  </span>
+                ) : mode === "signup" ? "Create Account" : "Sign In"}
               </Button>
             </form>
 
-            <div className="mt-6 text-center text-sm text-gray-600">
+            <div className="mt-6 text-center text-sm text-foreground/70">
               {mode === "signup" ? (
                 <>
                   Already have an account?{" "}
-                  <Link href="/auth?mode=login" className="text-green-600 hover:underline">
+                  <Link href="/auth?mode=login" className="text-primary hover:underline font-semibold">
                     Sign in
                   </Link>
                 </>
               ) : (
                 <>
                   Don't have an account?{" "}
-                  <Link href="/auth?mode=signup" className="text-green-600 hover:underline">
+                  <Link href="/auth?mode=signup" className="text-primary hover:underline font-semibold">
                     Sign up
                   </Link>
                 </>
@@ -243,13 +249,13 @@ export default function AuthPage() {
           </CardContent>
         </Card>
 
-        <div className="mt-6 text-center text-xs text-gray-500">
+        <div className="mt-6 text-center text-xs text-foreground/60">
           By continuing, you agree to our{" "}
-          <Link href="/terms" className="underline">
+          <Link href="/terms" className="underline text-primary">
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link href="/privacy" className="underline">
+          <Link href="/privacy" className="underline text-primary">
             Privacy Policy
           </Link>
         </div>

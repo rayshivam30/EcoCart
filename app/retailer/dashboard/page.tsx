@@ -15,6 +15,7 @@ import BlockchainTraceability from "@/components/BlockchainTraceability"
 import { supabase } from "@/lib/supabase"
 import { usePathname, useRouter } from "next/navigation";
 import { useRef, useEffect } from "react"
+import { useMemo } from "react"
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -77,6 +78,7 @@ export default function RetailerDashboard() {
   const [latestPackagingId, setLatestPackagingId] = useState<string | null>(null);
   const [overviewEcoScores, setOverviewEcoScores] = useState<number[]>([]);
   const [overviewAvgEcoScore, setOverviewAvgEcoScore] = useState<number | null>(null);
+  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -92,6 +94,19 @@ export default function RetailerDashboard() {
       listener?.subscription.unsubscribe();
     };
   }, [router, pathname]);
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        // Try to get full_name or email as fallback
+        setUserName(user.user_metadata?.full_name || user.email || "");
+      }
+    };
+    fetchUserName();
+  }, []);
+
+  const userInitial = useMemo(() => userName?.trim()?.charAt(0)?.toUpperCase() || "R", [userName]);
 
   // Fetch latest product and its packaging suggestion when suggestions tab is active
   useEffect(() => {
@@ -570,14 +585,8 @@ export default function RetailerDashboard() {
             </Badge>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
-              <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
-              <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
             <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
-              R
+              {userInitial}
             </div>
           </div>
         </div>
@@ -954,8 +963,8 @@ export default function RetailerDashboard() {
                     <CardDescription>Enter origin and destination to optimize your delivery route</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {/* Always show the routeResult debug block for troubleshooting */}
-                    <pre className="bg-gray-100 text-xs p-2 rounded mb-2 max-w-full overflow-x-auto">{JSON.stringify(routeResult, null, 2)}</pre>
+                    {/* Remove the debug block that shows raw JSON */}
+                    {/* <pre className="bg-gray-100 text-xs p-2 rounded mb-2 max-w-full overflow-x-auto">{JSON.stringify(routeResult, null, 2)}</pre> */}
                     {/* Restore the real route planner form */}
                     <form onSubmit={handleRouteSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div className="relative">
