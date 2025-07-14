@@ -248,17 +248,6 @@ export default function AuthPage() {
             </div>
           </CardContent>
         </Card>
-
-        <div className="mt-6 text-center text-xs text-foreground/60">
-          By continuing, you agree to our{" "}
-          <Link href="/terms" className="underline text-primary">
-            Terms of Service
-          </Link>{" "}
-          and{" "}
-          <Link href="/privacy" className="underline text-primary">
-            Privacy Policy
-          </Link>
-        </div>
       </div>
     </div>
   )

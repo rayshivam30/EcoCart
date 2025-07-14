@@ -28,6 +28,13 @@ import {
   Legend,
 } from 'chart.js';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 export default function RetailerDashboard() {
   const router = useRouter();
@@ -567,6 +574,12 @@ export default function RetailerDashboard() {
     }));
   }
 
+  // Add logout handler
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth");
+  };
+
   return (
     <>
       {/* Removed the upper route planner form as requested */}
@@ -584,11 +597,16 @@ export default function RetailerDashboard() {
               Pro Plan
             </Badge>
           </div>
-          <div className="flex items-center space-x-2 sm:space-x-4">
-            <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
-              {userInitial}
-            </div>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-medium cursor-pointer">
+                {userInitial}
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </header>
 

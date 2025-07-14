@@ -9,6 +9,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Package, Leaf, Award, TrendingUp, MapPin, Star, Gift, Truck, CheckCircle, Info } from "lucide-react"
 import { supabase, dbHelpers, Order } from "@/lib/supabase"
 import { Switch } from "@/components/ui/switch"
+import { useRouter } from "next/navigation"
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 export default function CustomerDashboard() {
   const [activeTab, setActiveTab] = useState("orders")
@@ -47,6 +55,8 @@ export default function CustomerDashboard() {
     greenDeliveryOptions: false,
   }
   const [prefs, setPrefs] = useState(defaultPrefs)
+
+  const router = useRouter();
 
   // Fetch orders for logged-in customer
   const fetchOrders = useCallback(async () => {
@@ -189,6 +199,14 @@ export default function CustomerDashboard() {
     setSavingPref(false)
   }
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth");
+  };
+
+  // After fetching profile, compute userInitial
+  const userInitial = profile?.full_name?.charAt(0)?.toUpperCase() || profile?.email?.charAt(0)?.toUpperCase() || "U";
+
   return (
     <div className="min-h-screen bg-gray-50">
       {showDemoBanner && (
@@ -218,9 +236,16 @@ export default function CustomerDashboard() {
                 {rewardsLoading ? 'Loading...' : rewardsError ? '0 Points' : `${totalPoints.toLocaleString()} Points`}
               </span>
             </div>
-            <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
-              C
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm font-medium cursor-pointer">
+                  {userInitial}
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
@@ -234,7 +259,7 @@ export default function CustomerDashboard() {
 
         {/* Mobile-Responsive Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
-          <Card>
+          <Card className="transition-transform duration-300 ease-out hover:scale-90 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Total Orders</CardTitle>
             </CardHeader>
@@ -264,7 +289,7 @@ export default function CustomerDashboard() {
               <p className="text-xs text-green-600">Lifetime savings</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="transition-transform duration-300 ease-out hover:scale-105 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Reward Points</CardTitle>
             </CardHeader>
@@ -279,7 +304,7 @@ export default function CustomerDashboard() {
               <p className="text-xs text-green-600">{rewards.length > 0 ? `+${rewards.filter(r => new Date(r.created_at).getMonth() === new Date().getMonth()).reduce((sum, r) => sum + (r.points || 0), 0)} this month` : ''}</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="transition-transform duration-300 ease-out hover:scale-105 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Eco Score</CardTitle>
             </CardHeader>
@@ -391,7 +416,7 @@ export default function CustomerDashboard() {
 
           <TabsContent value="rewards" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
+              <Card className="transition-transform duration-300 ease-out hover:scale-105 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Award className="h-5 w-5 text-purple-600" />
@@ -476,7 +501,7 @@ export default function CustomerDashboard() {
             ) : (
               <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
+              <Card className="transition-transform duration-300 ease-out hover:scale-105 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Leaf className="h-5 w-5 text-green-600" />
@@ -503,7 +528,7 @@ export default function CustomerDashboard() {
                   </div>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="transition-transform duration-300 ease-out hover:scale-105 hover:shadow-xl hover:border-green-400/70 hover:bg-green-50/60">
                 <CardHeader>
                   <CardTitle>Monthly Progress</CardTitle>
                 </CardHeader>

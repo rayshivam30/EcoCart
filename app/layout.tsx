@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'EcoCart',
+  description: 'An AI-powered platform that helps retailers and customers reduce delivery emissions and packaging waste.'
 }
 
 export default function RootLayout({

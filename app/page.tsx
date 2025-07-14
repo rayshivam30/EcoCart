@@ -1,11 +1,25 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Leaf, Package, Route, Award, TrendingUp, Users, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Leaf,
+  Package,
+  Route,
+  Award,
+  TrendingUp,
+  Users,
+  ArrowLeft,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function HomePage() {
   const [showContact, setShowContact] = useState(false);
@@ -63,15 +77,19 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="section-title">Contact Us</h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Get in touch with our team for support, partnerships, or any questions about EcoCart.
+              Get in touch with our team for support, partnerships, or any
+              questions about EcoCart.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-semibold mb-2 text-primary">Get in Touch</h3>
+                <h3 className="text-xl font-semibold mb-2 text-primary">
+                  Get in Touch
+                </h3>
                 <p className="text-foreground">
-                  Have questions about our platform? We're here to help you get started with sustainable logistics.
+                  Have questions about our platform? We're here to help you get
+                  started with sustainable logistics.
                 </p>
               </div>
               <div className="space-y-4">
@@ -99,16 +117,22 @@ export default function HomePage() {
                   </div>
                   <div>
                     <p className="font-medium text-primary">Address</p>
-                    <p className="text-foreground">123 Green Street, Eco City, EC 12345</p>
+                    <p className="text-foreground">
+                      123 Green Street, Eco City, EC 12345
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-accent/40 p-8 rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-primary">Send us a Message</h3>
+              <h3 className="text-xl font-semibold mb-4 text-primary">
+                Send us a Message
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-primary mb-1">Name</label>
+                  <label className="block text-sm font-medium text-primary mb-1">
+                    Name
+                  </label>
                   <input
                     type="text"
                     className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground"
@@ -116,7 +140,9 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary mb-1">Email</label>
+                  <label className="block text-sm font-medium text-primary mb-1">
+                    Email
+                  </label>
                   <input
                     type="email"
                     className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground"
@@ -124,7 +150,9 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-primary mb-1">Message</label>
+                  <label className="block text-sm font-medium text-primary mb-1">
+                    Message
+                  </label>
                   <textarea
                     rows={4}
                     className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white text-foreground"
@@ -156,7 +184,8 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="section-title">Help Center</h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Find answers to common questions and learn how to make the most of EcoCart.
+              Find answers to common questions and learn how to make the most of
+              EcoCart.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -276,8 +305,9 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="section-title">Revolutionizing Eco-Logistics</h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Our AI-powered platform combines smart packaging, green delivery optimization, and blockchain traceability
-              for sustainable commerce.
+              Our AI-powered platform combines smart packaging, green delivery
+              optimization, and blockchain traceability for sustainable
+              commerce.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -286,7 +316,8 @@ export default function HomePage() {
                 <Package className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>AI Packaging Optimization</CardTitle>
                 <CardDescription>
-                  Get AI-suggested eco-friendly packaging based on product dimensions, weight, and sustainability goals.
+                  Get AI-suggested eco-friendly packaging based on product
+                  dimensions, weight, and sustainability goals.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -302,7 +333,8 @@ export default function HomePage() {
                 <Route className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Carbon-Optimized Routes</CardTitle>
                 <CardDescription>
-                  Smart delivery route planning that prioritizes EVs and low-emission paths for maximum CO2 savings.
+                  Smart delivery route planning that prioritizes EVs and
+                  low-emission paths for maximum CO2 savings.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -318,8 +350,8 @@ export default function HomePage() {
                 <Award className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Blockchain Traceability</CardTitle>
                 <CardDescription>
-                  Track packaging materials from origin to delivery with blockchain-verified sustainability
-                  certificates.
+                  Track packaging materials from origin to delivery with
+                  blockchain-verified sustainability certificates.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -335,7 +367,8 @@ export default function HomePage() {
                 <TrendingUp className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Retailer Dashboard</CardTitle>
                 <CardDescription>
-                  Comprehensive analytics and insights for retailers to optimize their eco-logistics operations.
+                  Comprehensive analytics and insights for retailers to optimize
+                  their eco-logistics operations.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -351,7 +384,8 @@ export default function HomePage() {
                 <Users className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Customer Rewards</CardTitle>
                 <CardDescription>
-                  Customers earn points for choosing green delivery options and can track their environmental impact.
+                  Customers earn points for choosing green delivery options and
+                  can track their environmental impact.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -367,7 +401,8 @@ export default function HomePage() {
                 <Leaf className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Real-time Analytics</CardTitle>
                 <CardDescription>
-                  Monitor CO2 savings, packaging efficiency, and delivery performance with real-time analytics.
+                  Monitor CO2 savings, packaging efficiency, and delivery
+                  performance with real-time analytics.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -386,7 +421,10 @@ export default function HomePage() {
 
   if (showHowItWorks) {
     return (
-      <section id="how-it-works" className="section-spaced bg-accent/20 min-h-screen">
+      <section
+        id="how-it-works"
+        className="section-spaced bg-accent/20 min-h-screen"
+      >
         <div className="container mx-auto px-4 max-w-4xl">
           <button
             onClick={handleBack}
@@ -397,34 +435,45 @@ export default function HomePage() {
           </button>
           <div className="text-center mb-16">
             <h2 className="section-title">How EcoCart Works</h2>
-            <p className="text-xl text-foreground">Simple steps to sustainable logistics</p>
+            <p className="text-xl text-foreground">
+              Simple steps to sustainable logistics
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
                 1
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-primary">Upload Products</h3>
+              <h3 className="text-xl font-semibold mb-2 text-primary">
+                Upload Products
+              </h3>
               <p className="text-foreground">
-                Retailers upload product details including dimensions, weight, and destination.
+                Retailers upload product details including dimensions, weight,
+                and destination.
               </p>
             </div>
             <div className="text-center bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
                 2
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-primary">AI Optimization</h3>
+              <h3 className="text-xl font-semibold mb-2 text-primary">
+                AI Optimization
+              </h3>
               <p className="text-foreground">
-                Our AI suggests optimal packaging and calculates carbon-efficient delivery routes.
+                Our AI suggests optimal packaging and calculates
+                carbon-efficient delivery routes.
               </p>
             </div>
             <div className="text-center bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mb-4">
                 3
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-primary">Green Delivery</h3>
+              <h3 className="text-xl font-semibold mb-2 text-primary">
+                Green Delivery
+              </h3>
               <p className="text-foreground">
-                Customers choose eco-friendly options, earn rewards, and track their environmental impact.
+                Customers choose eco-friendly options, earn rewards, and track
+                their environmental impact.
               </p>
             </div>
           </div>
@@ -440,21 +489,35 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Leaf className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-            <span className="text-lg sm:text-2xl font-bold text-primary">EcoCart</span>
+            <span className="text-lg sm:text-2xl font-bold text-primary">
+              EcoCart
+            </span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <button onClick={handleFeaturesClick} className="text-foreground hover:text-primary transition-colors">
+            <button
+              onClick={handleFeaturesClick}
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Features
             </button>
-            <button onClick={handleHowItWorksClick} className="text-foreground hover:text-primary transition-colors">
+            <button
+              onClick={handleHowItWorksClick}
+              className="text-foreground hover:text-primary transition-colors"
+            >
               How it Works
             </button>
-            <button onClick={handleContactClick} className="text-foreground hover:text-primary transition-colors">
+            <button
+              onClick={handleContactClick}
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Contact
             </button>
-            <button onClick={handleHelpClick} className="text-foreground hover:text-primary transition-colors">
+            <button
+              onClick={handleHelpClick}
+              className="text-foreground hover:text-primary transition-colors"
+            >
               Help Center
             </button>
           </nav>
@@ -474,7 +537,6 @@ export default function HomePage() {
           </div>
         </div>
       </header>
-
       {/* Hero Section */}
       <section className="hero-gradient section-spaced px-4">
         <div className="container mx-auto text-center">
@@ -486,55 +548,100 @@ export default function HomePage() {
             <span className="text-primary">Green Delivery</span>
           </h1>
           <p className="text-base sm:text-xl text-foreground mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
-            AI-driven packaging, green routes, and blockchain materials—save costs and cut your carbon footprint.
+            AI-driven packaging, green routes, and blockchain materials—save
+            costs and cut your carbon footprint.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
             <Link href="/auth?mode=signup&role=retailer">
-              <Button size="lg" className="button-enhanced button-green w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="button-enhanced button-green w-full sm:w-auto"
+              >
                 Start as Retailer
               </Button>
             </Link>
             <Link href="/auth?mode=signup&role=customer">
-              <Button size="lg" variant="outline" className="button-enhanced w-full sm:w-auto bg-transparent border-primary text-primary">
+              <Button
+                size="lg"
+                variant="outline"
+                className="button-enhanced w-full sm:w-auto bg-transparent border-primary text-primary"
+              >
                 Join as Customer
               </Button>
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Stats Section */}
-      <section className="section-spaced bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 text-center">
-            <div className="stat-card">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">85%</div>
-              <div className="text-sm sm:text-base text-foreground">CO2 Reduction</div>
+      *
+      <section className="w-full py-12">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary text-center mb-10 tracking-tight">
+            Why Choose EcoCart?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full">
+            {/* Card 1 */}
+            <div className="relative rounded-2xl bg-white/80 border border-green-200 shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-green-200/60">
+              <span className="text-4xl mb-3">🌿</span>
+              <h3 className="text-xl font-bold text-primary mb-1">
+                Eco-Friendly AI
+              </h3>
+              <div className="text-xs text-green-700 mb-2 font-semibold">
+                Avg. 30% less packaging waste
+              </div>
+              <p className="text-foreground text-base mb-4">
+                Sustainable packaging & delivery recommendations powered by
+                advanced AI for a greener tomorrow.
+              </p>
+              <span className="absolute right-4 bottom-4 opacity-10 text-6xl pointer-events-none select-none">
+                🌱
+              </span>
             </div>
-            <div className="stat-card">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">40%</div>
-              <div className="text-sm sm:text-base text-foreground">Packaging Waste Saved</div>
+            {/* Card 2 */}
+            <div className="relative rounded-2xl bg-white/80 border border-green-200 shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-green-200/60">
+              <span className="text-4xl mb-3">🚚</span>
+              <h3 className="text-xl font-bold text-primary mb-1">
+                Smart Logistics
+              </h3>
+              <div className="text-xs text-green-700 mb-2 font-semibold">
+                Up to 25% CO₂ savings
+              </div>
+              <p className="text-foreground text-base mb-4">
+                Carbon-aware, real-time route optimization for faster, more
+                efficient, and eco-friendly deliveries.
+              </p>
+              <span className="absolute right-4 bottom-4 opacity-10 text-6xl pointer-events-none select-none">
+                🛣
+              </span>
             </div>
-            <div className="stat-card">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">1000+</div>
-              <div className="text-sm sm:text-base text-foreground">Active Retailers</div>
-            </div>
-            <div className="stat-card">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">50K+</div>
-              <div className="text-sm sm:text-base text-foreground">Green Deliveries</div>
+            {/* Card 3 */}
+            <div className="relative rounded-2xl bg-white/80 border border-green-200 shadow-lg p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-green-200/60">
+              <span className="text-4xl mb-3">🔗</span>
+              <h3 className="text-xl font-bold text-primary mb-1">
+                Blockchain Traceability
+              </h3>
+              <div className="text-xs text-green-700 mb-2 font-semibold">
+                100% supply chain transparency
+              </div>
+              <p className="text-foreground text-base mb-4">
+                Transparent, blockchain-verified material tracking from source
+                to delivery for trust and compliance.
+              </p>
+              <span className="absolute right-4 bottom-4 opacity-10 text-6xl pointer-events-none select-none">
+                🔒
+              </span>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Features Section (always visible on homepage) */}
+      *{/* Features Section (always visible on homepage) */}
       <section id="features" className="section-spaced px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="section-title">Revolutionizing Eco-Logistics</h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto">
-              Our AI-powered platform combines smart packaging, green delivery optimization, and blockchain traceability
-              for sustainable commerce.
+              Our AI-powered platform combines smart packaging, green delivery
+              optimization, and blockchain traceability for sustainable
+              commerce.
             </p>
           </div>
 
@@ -544,7 +651,8 @@ export default function HomePage() {
                 <Package className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>AI Packaging Optimization</CardTitle>
                 <CardDescription>
-                  Get AI-suggested eco-friendly packaging based on product dimensions, weight, and sustainability goals.
+                  Get AI-suggested eco-friendly packaging based on product
+                  dimensions, weight, and sustainability goals.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -561,7 +669,8 @@ export default function HomePage() {
                 <Route className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Carbon-Optimized Routes</CardTitle>
                 <CardDescription>
-                  Smart delivery route planning that prioritizes EVs and low-emission paths for maximum CO2 savings.
+                  Smart delivery route planning that prioritizes EVs and
+                  low-emission paths for maximum CO2 savings.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -578,8 +687,8 @@ export default function HomePage() {
                 <Award className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Blockchain Traceability</CardTitle>
                 <CardDescription>
-                  Track packaging materials from origin to delivery with blockchain-verified sustainability
-                  certificates.
+                  Track packaging materials from origin to delivery with
+                  blockchain-verified sustainability certificates.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -596,7 +705,8 @@ export default function HomePage() {
                 <TrendingUp className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Retailer Dashboard</CardTitle>
                 <CardDescription>
-                  Comprehensive analytics and insights for retailers to optimize their eco-logistics operations.
+                  Comprehensive analytics and insights for retailers to optimize
+                  their eco-logistics operations.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -613,7 +723,8 @@ export default function HomePage() {
                 <Users className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Customer Rewards</CardTitle>
                 <CardDescription>
-                  Customers earn points for choosing green delivery options and can track their environmental impact.
+                  Customers earn points for choosing green delivery options and
+                  can track their environmental impact.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -630,7 +741,8 @@ export default function HomePage() {
                 <Leaf className="h-12 w-12 text-primary mb-4" />
                 <CardTitle>Real-time Analytics</CardTitle>
                 <CardDescription>
-                  Monitor CO2 savings, packaging efficiency, and delivery performance with real-time analytics.
+                  Monitor CO2 savings, packaging efficiency, and delivery
+                  performance with real-time analytics.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -644,20 +756,23 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* How it Works */}
       {/* This section is now conditionally rendered */}
-
       {/* CTA Section */}
-      <section className="section-spaced bg-primary text-primary-foreground">
+      <section className="section-spaced bg-green-300 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="section-title text-white">Ready to Go Green?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of retailers and customers making a difference with sustainable logistics.
+            Join thousands of retailers and customers making a difference with
+            sustainable logistics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/auth?mode=signup&role=retailer">
-              <Button size="lg" variant="secondary" className="button-enhanced button-green">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="button-enhanced button-green"
+              >
                 Start Your Green Journey
               </Button>
             </Link>
@@ -673,7 +788,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-foreground text-background py-12 footer-top-border">
         <div className="container mx-auto px-4">
@@ -683,7 +797,9 @@ export default function HomePage() {
                 <Leaf className="h-6 w-6 text-accent" />
                 <span className="text-xl font-bold">EcoCart</span>
               </div>
-              <p className="text-accent">AI-powered eco-logistics platform for sustainable commerce.</p>
+              <p className="text-accent">
+                AI-powered eco-logistics platform for sustainable commerce.
+              </p>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Platform</h3>
@@ -729,12 +845,18 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-accent">
                 <li>
-                  <button onClick={handleHelpClick} className="footer-link text-left">
+                  <button
+                    onClick={handleHelpClick}
+                    className="footer-link text-left"
+                  >
                     Help Center
                   </button>
                 </li>
                 <li>
-                  <button onClick={handleContactClick} className="footer-link text-left">
+                  <button
+                    onClick={handleContactClick}
+                    className="footer-link text-left"
+                  >
                     Contact
                   </button>
                 </li>
@@ -752,5 +874,5 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
